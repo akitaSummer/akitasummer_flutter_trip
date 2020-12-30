@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:akitasummer_flutter_trip/dao/home_dart.dart';
+import 'package:akitasummer_flutter_trip/model/common_model.dart';
+import 'package:akitasummer_flutter_trip/model/home_model.dart';
+import 'package:akitasummer_flutter_trip/widget/grid_nav.dart';
+import 'package:akitasummer_flutter_trip/widget/local_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -12,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomeState extends State<HomePage> {
 
   double appBarAlpha = 0;
+  List<CommonModel> localNavList = [];
 
   List<String> _imageUrls = [
     'http://pages.ctrip.com/commerce/promote/20180718/yxzy/img/640sygd.jpg',
@@ -20,8 +28,15 @@ class _HomeState extends State<HomePage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f2),
         body: Stack(
           children: [
             MediaQuery.removePadding( // 用于去除组件内置padding
@@ -48,6 +63,10 @@ class _HomeState extends State<HomePage> {
                             },
                             pagination: SwiperPagination(),
                           )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+                        child: LocalNav(localNavList: localNavList),
                       ),
                       Container(
                           height: 800,
@@ -85,5 +104,16 @@ class _HomeState extends State<HomePage> {
     setState(() {
       appBarAlpha = alpha;
     });
+  }
+
+  loadData() async {
+    try {
+      HomeModel model = await HomeDao.fetch();
+      setState(() {
+        localNavList = model.localNavList;
+      });
+    } catch(e) {
+      print(e);
+    }
   }
 }

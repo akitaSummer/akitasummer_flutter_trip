@@ -15,7 +15,7 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   final _activeColor = Colors.blue;
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   final PageController _controller = PageController(
     initialPage: 0
@@ -26,6 +26,7 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
       body: PageView(
         controller: _controller,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
           Search(),

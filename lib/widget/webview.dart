@@ -36,7 +36,6 @@ class _WebViewState extends State<WebView> {
 
   @override
   void initState() {
-    super.initState();
     webViewReference.close();
     _onUrlChanged = webViewReference.onUrlChanged.listen((String url) { });
     _onStateChanged = webViewReference.onStateChanged.listen((WebViewStateChanged state) {
@@ -58,15 +57,16 @@ class _WebViewState extends State<WebView> {
     _onErrorHttp = webViewReference.onHttpError.listen((WebViewHttpError error) {
       print(error);
     });
+    super.initState();
   }
 
   @override
   void dispose() {
-    super.dispose();
     _onStateChanged.cancel();
     _onUrlChanged.cancel();
     _onErrorHttp.cancel();
     webViewReference.dispose();
+    super.dispose();
   }
 
   @override
@@ -108,11 +108,16 @@ class _WebViewState extends State<WebView> {
       );
     }
     return Container(
+      padding: EdgeInsets.fromLTRB(0, 40, 0, 10),
+      color: backgroundColor,
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Stack(
           children: [
             GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 10),
                 child: Icon(

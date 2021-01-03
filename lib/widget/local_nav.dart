@@ -1,5 +1,4 @@
 import 'package:akitasummer_flutter_trip/model/common_model.dart';
-import 'package:akitasummer_flutter_trip/model/grid_nav_model.dart';
 import 'package:akitasummer_flutter_trip/widget/webview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

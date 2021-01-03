@@ -29,7 +29,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         physics: NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
-          Search(),
+          Search(hideLeft: true,),
           Travel(),
           My(),
         ],

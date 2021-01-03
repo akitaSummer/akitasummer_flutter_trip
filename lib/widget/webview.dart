@@ -33,6 +33,7 @@ class _WebViewState extends State<WebView> {
   StreamSubscription<WebViewStateChanged> _onStateChanged;
   StreamSubscription<WebViewHttpError> _onErrorHttp;
   bool exiting = false;
+  bool isClose = false;
 
   @override
   void initState() {
@@ -83,7 +84,7 @@ class _WebViewState extends State<WebView> {
       body: Column(
         children: [
           _appBar(Color(int.parse('0xff' + statusBarColorStr)), backButtonColor),
-          Expanded(child: WebviewScaffold(
+          isClose ? Expanded(child: Container(child: null)) : Expanded(child:WebviewScaffold(
             url: widget.url,
             withZoom: true,
             withLocalStorage: true,
@@ -116,6 +117,9 @@ class _WebViewState extends State<WebView> {
           children: [
             GestureDetector(
               onTap: () {
+                setState(() {
+                  isClose = true;
+                });
                 Navigator.pop(context);
               },
               child: Container(

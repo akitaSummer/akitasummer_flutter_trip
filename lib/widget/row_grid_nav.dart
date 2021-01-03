@@ -15,13 +15,13 @@ class RowGridNav extends StatelessWidget {
       color: Colors.transparent,
       borderRadius: BorderRadius.all(Radius.circular(6)),
       clipBehavior: Clip.antiAlias,
-      child: Column(
+      child: gridNavModel != null ? Column(
         children: [
           _row(context, gridNavModel.hotel, first: true),
           _row(context, gridNavModel.flight),
           _row(context, gridNavModel.travel)
         ],
-      ),
+      ) : null,
     );
   }
 
@@ -57,8 +57,8 @@ class RowGridNav extends StatelessWidget {
             flex: 2,
             child: Column(
               children: [
-                Expanded(flex: 1,child: Row(children: [_smallItem(context, items.item1), _smallItem(context, items.item2, left: false, right: false)])),
-                Expanded(flex: 1,child: Row(children: [_smallItem(context, items.item3, bottom: false), _smallItem(context, items.item4, left:false, bottom: false, right: false)])),
+                Expanded(child: Row(children: [_smallItem(context, items.item1), _smallItem(context, items.item2, left: false, right: false)])),
+                Expanded(child: Row(children: [_smallItem(context, items.item3, bottom: false), _smallItem(context, items.item4, left:false, bottom: false, right: false)])),
               ],
             ),
           )

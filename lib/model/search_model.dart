@@ -18,7 +18,7 @@ class SearchItem {
   final String price;
   final String star;
   final String zonename;
-  final String destrictname;
+  final String districtname;
   final String url;
 
   SearchItem({
@@ -27,7 +27,7 @@ class SearchItem {
     this.price,
     this.star,
     this.zonename,
-    this.destrictname,
+    this.districtname,
     this.url
   });
 
@@ -38,7 +38,7 @@ class SearchItem {
       price: json['price'],
       star: json['star'],
       zonename: json['zonename'],
-      destrictname: json['destrictname'],
+      districtname: json['districtname'],
       url: json['url']
     );
   }

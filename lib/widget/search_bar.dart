@@ -128,7 +128,7 @@ class _SearchBarState extends State<SearchBar> {
             onChanged: _onChanged,
             autofocus: true,
             decoration: InputDecoration(
-              // contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+              contentPadding: EdgeInsets.fromLTRB(5, -20, 5, 0),
               border: InputBorder.none,
               hintText: widget.hint ?? '',
               hintStyle: TextStyle(fontSize: 15)

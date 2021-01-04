@@ -5,6 +5,7 @@ import 'package:akitasummer_flutter_trip/model/common_model.dart';
 import 'package:akitasummer_flutter_trip/model/grid_nav_model.dart';
 import 'package:akitasummer_flutter_trip/model/home_model.dart';
 import 'package:akitasummer_flutter_trip/model/sales_box_model.dart';
+import 'package:akitasummer_flutter_trip/pages/Search.dart';
 import 'package:akitasummer_flutter_trip/widget/grid_nav.dart';
 import 'package:akitasummer_flutter_trip/widget/local_nav.dart';
 import 'package:akitasummer_flutter_trip/widget/row_grid_nav.dart';
@@ -190,7 +191,14 @@ class _HomeState extends State<HomePage> {
     return null;
   }
 
-  _jumpToSearch() {}
+  _jumpToSearch() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Search(hint: SEARCH_BAR_DEFAULT_TEXT)
+      )
+    );
+  }
 
   _jumpToSpeak() {}
 }

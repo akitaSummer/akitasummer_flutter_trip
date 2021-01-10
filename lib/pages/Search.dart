@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'Speak.dart';
+
 const URL = 'https://m.ctrip.com/restapi/h5api/searchapp/search?source=mobileweb&autocomplete&contentType=json&keyword=';
 const TYPES = [
   'channelgroup',
@@ -37,6 +39,14 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   SearchModel searchModel;
   String keyword;
+
+  @override
+  void initState() {
+    if (widget.keyword != null) {
+      _onTextChange(widget.keyword);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +89,7 @@ class _SearchState extends State<Search> {
               hideLeft: widget.hideLeft,
               defaultText: widget.keyword,
               hint: widget.hint,
+              speakClick: _jumpToSpeak,
               leftButtonClick: () {
                 Navigator.pop(context);
               },
@@ -87,6 +98,15 @@ class _SearchState extends State<Search> {
           ),
         )
       ],
+    );
+  }
+
+  _jumpToSpeak() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Speak()
+        )
     );
   }
 

@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:akitasummer_flutter_trip/dao/home_dart.dart';
 import 'package:akitasummer_flutter_trip/model/common_model.dart';
 import 'package:akitasummer_flutter_trip/model/grid_nav_model.dart';
 import 'package:akitasummer_flutter_trip/model/home_model.dart';
 import 'package:akitasummer_flutter_trip/model/sales_box_model.dart';
 import 'package:akitasummer_flutter_trip/pages/Search.dart';
+import 'package:akitasummer_flutter_trip/pages/Speak.dart';
 import 'package:akitasummer_flutter_trip/widget/grid_nav.dart';
 import 'package:akitasummer_flutter_trip/widget/local_nav.dart';
 import 'package:akitasummer_flutter_trip/widget/row_grid_nav.dart';
@@ -200,5 +199,12 @@ class _HomeState extends State<HomePage> {
     );
   }
 
-  _jumpToSpeak() {}
+  _jumpToSpeak() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Speak()
+        )
+    );
+  }
 }

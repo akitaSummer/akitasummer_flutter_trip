@@ -1,5 +1,6 @@
 import 'package:akitasummer_flutter_trip/dao/travel_tab_dao.dart';
 import 'package:akitasummer_flutter_trip/model/travel-tab-model.dart';
+import 'package:akitasummer_flutter_trip/pages/travel_tab.dart';
 import 'package:flutter/material.dart';
 
 class Travel extends StatefulWidget {
@@ -51,8 +52,8 @@ class _TravelState extends State<Travel> with TickerProviderStateMixin {
                 labelColor: Colors.black,
                 labelPadding: EdgeInsets.fromLTRB(20, 0, 10, 5),
                 indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(color: Color(0Xff2fcfbb), width: 3),
-                  insets: EdgeInsets.only(bottom: 10)
+                    borderSide: BorderSide(color: Color(0Xff2fcfbb), width: 3),
+                    insets: EdgeInsets.only(bottom: 10)
                 ),
               ),
             ),
@@ -61,7 +62,11 @@ class _TravelState extends State<Travel> with TickerProviderStateMixin {
               child: TabBarView(
                 controller: _controller,
                 children: tabs.map((TravelTab tab) {
-                  return Text(tab.groupChannelCode);
+                  return TravelTabPage(
+                    travelUrl: travelTabModel.url,
+                    params: travelTabModel.params,
+                    groupChannelCode: tab.groupChannelCode,
+                  );
                 }).toList(),
               ),
             )

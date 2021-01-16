@@ -5,6 +5,7 @@ import 'package:akitasummer_flutter_trip/model/home_model.dart';
 import 'package:akitasummer_flutter_trip/model/sales_box_model.dart';
 import 'package:akitasummer_flutter_trip/pages/Search.dart';
 import 'package:akitasummer_flutter_trip/pages/Speak.dart';
+import 'package:akitasummer_flutter_trip/util/navigator_util.dart';
 import 'package:akitasummer_flutter_trip/widget/grid_nav.dart';
 import 'package:akitasummer_flutter_trip/widget/local_nav.dart';
 import 'package:akitasummer_flutter_trip/widget/row_grid_nav.dart';
@@ -26,7 +27,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
-
   double appBarAlpha = 0;
   List<CommonModel> localNavList = [];
   List<CommonModel> subNavList = [];
@@ -44,28 +44,29 @@ class _HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f2f2),
+        backgroundColor: Color(0xfff2f2f2),
         body: Stack(
           children: [
-            MediaQuery.removePadding( // 用于去除组件内置padding
+            MediaQuery.removePadding(
+                // 用于去除组件内置padding
                 context: context,
                 removeTop: true,
                 child: RefreshIndicator(
                   onRefresh: _handleRefresh,
-                  child: NotificationListener( // 用于监听滚动
-                    onNotification: (scrollNotification) {
-                      if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) { // 滚动且是列表滚动时
-                        _onScroll(scrollNotification.metrics.pixels);
-                      }
-                    },
-                    child: _listView
-                  ),
-                )
-            ),
+                  child: NotificationListener(
+                      // 用于监听滚动
+                      onNotification: (scrollNotification) {
+                        if (scrollNotification is ScrollUpdateNotification &&
+                            scrollNotification.depth == 0) {
+                          // 滚动且是列表滚动时
+                          _onScroll(scrollNotification.metrics.pixels);
+                        }
+                      },
+                      child: _listView),
+                )),
             _appBar
           ],
-        )
-    );
+        ));
   }
 
   _onScroll(offset) {
@@ -83,10 +84,7 @@ class _HomeState extends State<HomePage> {
   Widget get _listView {
     return ListView(
       children: [
-        Container(
-            height: 160,
-            child: _banner
-        ),
+        Container(height: 160, child: _banner),
         Padding(
           padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
           child: LocalNav(localNavList: localNavList),
@@ -115,19 +113,19 @@ class _HomeState extends State<HomePage> {
     return Swiper(
       itemCount: bannerList.length,
       autoplay: true,
-      itemBuilder: (BuildContext context, int index){
+      itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          onTap: (){
+          onTap: () {
             CommonModel model = bannerList[index];
-            Navigator.push(
+            NavigatorUtil.push(
                 context,
-                MaterialPageRoute(builder: (context) => WebView(url: model.url, title: model.title, hideAppBar: model.hideAppbar,))
-            );
+                WebView(
+                  url: model.url,
+                  title: model.title,
+                  hideAppBar: model.hideAppbar,
+                ));
           },
-          child: Image.network(
-              bannerList[index].icon,
-              fit: BoxFit.fill
-          ),
+          child: Image.network(bannerList[index].icon, fit: BoxFit.fill),
         );
       },
       pagination: SwiperPagination(),
@@ -142,17 +140,17 @@ class _HomeState extends State<HomePage> {
               gradient: LinearGradient(
                   colors: [Color(0x66000000), Colors.transparent],
                   begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter
-              )
-          ),
+                  end: Alignment.bottomCenter)),
           child: Container(
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             height: 80.0,
             decoration: BoxDecoration(
-                color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255)
-            ),
+                color:
+                    Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255)),
             child: SearchBar(
-              searchBarType: appBarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,
+              searchBarType: appBarAlpha > 0.2
+                  ? SearchBarType.homeLight
+                  : SearchBarType.home,
               inputBoxClick: _jumpToSearch,
               speakClick: _jumpToSpeak,
               defaultText: SEARCH_BAR_DEFAULT_TEXT,
@@ -163,10 +161,7 @@ class _HomeState extends State<HomePage> {
         Container(
           height: appBarAlpha > 0.2 ? 0.5 : 0,
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(color: Colors.black12, blurRadius: 0.5)
-            ]
-          ),
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]),
         )
       ],
     );
@@ -183,7 +178,7 @@ class _HomeState extends State<HomePage> {
         bannerList = model.bannerList;
         _loading = false;
       });
-    } catch(e) {
+    } catch (e) {
       _loading = false;
       print(e);
     }
@@ -192,19 +187,12 @@ class _HomeState extends State<HomePage> {
 
   _jumpToSearch() {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Search(hint: SEARCH_BAR_DEFAULT_TEXT)
-      )
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => Search(hint: SEARCH_BAR_DEFAULT_TEXT)));
   }
 
   _jumpToSpeak() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Speak()
-        )
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Speak()));
   }
 }

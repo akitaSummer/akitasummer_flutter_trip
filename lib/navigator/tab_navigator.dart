@@ -47,29 +47,20 @@ class _TabNavigatorState extends State<TabNavigator> {
         unselectedLabelStyle: TextStyle(color: _defaultColor),
         type: BottomNavigationBarType.fixed,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: _defaultColor),
-            activeIcon: Icon(Icons.home, color: _activeColor),
-              // title: Text('Home', style: TextStyle(color: _currentIndex != 1 ? _defaultColor : _activeColor)),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search, color: _defaultColor),
-              activeIcon: Icon(Icons.search, color: _activeColor),
-              label: 'Search'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt, color: _defaultColor),
-              activeIcon: Icon(Icons.camera_alt, color: _activeColor),
-              label: 'Travel'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle, color: _defaultColor),
-              activeIcon: Icon(Icons.account_circle, color: _activeColor),
-              label: 'My'
-          ),
+          _bottomItem('Home', Icons.home),
+          _bottomItem('Search', Icons.search),
+          _bottomItem('Travel', Icons.camera_alt),
+          _bottomItem('My', Icons.circle),
         ],
       ),
+    );
+  }
+  
+  _bottomItem(String label, IconData icon) {
+    return BottomNavigationBarItem(
+      icon: Icon(icon, color: _defaultColor),
+      activeIcon: Icon(icon, color: _activeColor),
+      label: label,
     );
   }
 }
